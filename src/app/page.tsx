@@ -1,17 +1,31 @@
+import { useState, useEffect } from 'react';
+
 export default function Home() {
   function genColor() {
-    return `#${Math.floor(Math.random()*16777215).toString(16)}`
+    return `#${Math.floor(Math.random() * 16777215).toString(16)}`;
   }
 
-  const year = new Date().getFullYear()
+  const year = new Date().getFullYear();
 
-  let color1 = genColor()
-  let color2 = genColor()
-  let color3 = genColor()
-  let color4 = genColor()
+  const [colors, setColors] = useState({
+    color1: genColor(),
+    color2: genColor(),
+    color3: genColor(),
+    color4: genColor(),
+  });
 
-  return(
-    <> 
+  useEffect(() => {
+    const newColors = {
+      color1: genColor(),
+      color2: genColor(),
+      color3: genColor(),
+      color4: genColor(),
+    };
+    setColors(newColors);
+  }, []);
+
+  return (
+    <>
       <header>
         <div>
           <title>Gerador de cores</title>
@@ -19,10 +33,10 @@ export default function Home() {
       </header>
 
       <main>
-        <div className="color1" style={{backgroundColor: color1}}>{color1}</div>
-        <div className="color2" style={{backgroundColor: color2}}>{color2}</div>
-        <div className="color3" style={{backgroundColor: color3}}>{color3}</div>
-        <div className="color4" style={{backgroundColor: color4}}>{color4}</div>
+        <div className="color1" style={{ backgroundColor: colors.color1 }}>{colors.color1}</div>
+        <div className="color2" style={{ backgroundColor: colors.color2 }}>{colors.color2}</div>
+        <div className="color3" style={{ backgroundColor: colors.color3 }}>{colors.color3}</div>
+        <div className="color4" style={{ backgroundColor: colors.color4 }}>{colors.color4}</div>
       </main>
       <footer>Paulo &copy;{year}</footer>
     </>
